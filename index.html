@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cinematic Sarvesh</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(circle at 10% 15%,#ffdce9,transparent 32%),
+    radial-gradient(circle at 90% 10%,#d9e8ff,transparent 32%),
+    radial-gradient(circle at 50% 90%,#fff0c9,transparent 35%),
+    #f8fbff;
+  color:#151515;
+  overflow-x:hidden;
+}
+
+/* TOP BAR */
+.topbar{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  padding:18px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:10;
+}
+
+.logo{
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.logo span{
+  color:#e72c78;
+}
+
+/* INSTAGRAM */
+.instagram{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  color:white;
+  background:linear-gradient(135deg,#6d24ff,#e72c78,#ff8a00);
+  padding:10px 16px;
+  border-radius:30px;
+  font-size:13px;
+  font-weight:800;
+  box-shadow:0 8px 25px #8a2cff35;
+}
+
+.instagram svg{
+  width:19px;
+  height:19px;
+  fill:white;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding:120px 6% 70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+}
+
+.heroText{
+  width:55%;
+  z-index:2;
+}
+
+.badge{
+  display:inline-block;
+  background:white;
+  padding:9px 17px;
+  border-radius:30px;
+  box-shadow:0 8px 25px #00000012;
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+h1{
+  margin-top:22px;
+  font-size:clamp(48px,8vw,88px);
+  line-height:.9;
+  font-weight:950;
+  letter-spacing:-3px;
+}
+
+h1 span{
+  background:linear-gradient(90deg,#6925ff,#e52b78,#ff7415);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.subtitle{
+  margin-top:25px;
+  max-width:600px;
+  font-size:19px;
+  line-height:1.6;
+  color:#555;
+}
+
+.buttons{
+  margin-top:30px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  text-decoration:none;
+  padding:15px 23px;
+  border-radius:12px;
+  font-weight:800;
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:translateY(-5px);
+}
+
+.dark{
+  color:white;
+  background:#151515;
+  box-shadow:0 12px 25px #0003;
+}
+
+.light{
+  color:#151515;
+  background:white;
+  border:1px solid #ddd;
+}
+
+/* CAMERA AREA */
+.cameraArea{
+  width:40%;
+  min-height:500px;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.glow{
+  position:absolute;
+  width:390px;
+  height:390px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#d9c9ff,#ffd5e8,#c9f1ff);
+  box-shadow:0 30px 80px #7c4cff22;
+}
+
+/* CAMERA */
+.camera{
+  width:250px;
+  height:170px;
+  border-radius:28px;
+  background:linear-gradient(145deg,#1c1c1c,#686868,#111);
+  position:relative;
+  z-index:3;
+  transform:rotate(-7deg);
+  box-shadow:25px 30px 45px #0004;
+}
+
+.cameraTop{
+  position:absolute;
+  top:-25px;
+  left:35px;
+  width:70px;
+  height:35px;
+  background:#292929;
+  border-radius:12px 12px 0 0;
+}
+
+.lens{
+  position:absolute;
+  width:95px;
+  height:95px;
+  border-radius:50%;
+  right:30px;
+  top:37px;
+  background:
+    radial-gradient(circle at 35% 30%,#b9f4ff,#286ca5 25%,#111 55%,#000 70%);
+  border:9px solid #333;
+  box-shadow:inset 0 0 20px #000;
+}
+
+.flash{
+  position:absolute;
+  left:28px;
+  top:40px;
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:#ddd;
+}
+
+.rec{
+  position:absolute;
+  left:28px;
+  bottom:25px;
+  color:#ff3030;
+  font-size:11px;
+  font-weight:bold;
+}
+
+/* TRIPOD */
+.tripod{
+  position:absolute;
+  z-index:2;
+  bottom:45px;
+  width:13px;
+  height:170px;
+  background:linear-gradient(90deg,#222,#888,#222);
+  border-radius:20px;
+}
+
+.tripod:before,
+.tripod:after{
+  content:"";
+  position:absolute;
+  bottom:-20px;
+  width:125px;
+  height:10px;
+  background:#222;
+  border-radius:20px;
+}
+
+.tripod:before{
+  transform:rotate(20deg);
+  left:-100px;
+}
+
+.tripod:after{
+  transform:rotate(-20deg);
+  left:-12px;
+}
+
+/* SERVICES */
+.services{
+  padding:90px 6%;
+  background:#ffffffd9;
+}
+
+.title{
+  text-align:center;
+  font-size:46px;
+  font-weight:950;
+}
+
+.sub{
+  text-align:center;
+  margin:12px auto 45px;
+  color:#666;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:28px 22px;
+  border-radius:22px;
+  min-height:220px;
+  border:1px solid #eee;
+  box-shadow:0 15px 40px #00000010;
+  transition:.35s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+}
+
+.no{
+  color:#e52c78;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.card h3{
+  margin-top:15px;
+  font-size:22px;
+}
+
+.card p{
+  margin-top:12px;
+  color:#666;
+  line-height:1.5;
+}
+
+/* ABOUT */
+.about{
+  padding:90px 6%;
+  text-align:center;
+}
+
+.aboutBox{
+  max-width:850px;
+  margin:35px auto 0;
+  padding:40px;
+  background:white;
+  border-radius:25px;
+  box-shadow:0 15px 40px #00000010;
+}
+
+.aboutBox p{
+  color:#555;
+  line-height:1.7;
+  font-size:17px;
+}
+
+/* CONTACT */
+.contact{
+  padding:80px 6%;
+  text-align:center;
+  background:linear-gradient(135deg,#181818,#383838);
+  color:white;
+}
+
+.contact h2{
+  font-size:42px;
+}
+
+.contact p{
+  margin:15px 0 25px;
+  color:#ddd;
+}
+
+.contact a{
+  display:inline-block;
+  text-decoration:none;
+  padding:15px 25px;
+  border-radius:12px;
+  background:white;
+  color:#111;
+  font-weight:900;
+}
+
+/* FOOTER */
+footer{
+  padding:25px;
+  text-align:center;
+  background:#111;
+  color:#aaa;
+  font-size:13px;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+  .hero{
+    flex-direction:column;
+    text-align:center;
+    padding-top:110px;
+  }
+
+  .heroText,
+  .cameraArea{
+    width:100%;
+  }
+
+  .subtitle{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .buttons{
+    justify-content:center;
+  }
+
+  .cameraArea{
+    min-height:430px;
+  }
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:550px){
+
+  .topbar{
+    padding:15px 4%;
+  }
+
+  .logo{
+    font-size:15px;
+  }
+
+  .instagram{
+    padding:8px 11px;
+    font-size:10px;
+  }
+
+  .instagram svg{
+    width:16px;
+    height:16px;
+  }
+
+  h1{
+    font-size:52px;
+  }
+
+  .glow{
+    width:300px;
+    height:300px;
+  }
+
+  .camera{
+    transform:scale(.82) rotate(-7deg);
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .aboutBox{
+    padding:25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP -->
+<div class="topbar">
+
+  <div class="logo">
+    CINEMATIC <span>SARVESH</span>
+  </div>
+
+  <a class="instagram"
+     href="https://www.instagram.com/"
+     target="_blank">
+
+    <!-- INSTAGRAM LOGO -->
+    <svg viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18"
+            rx="5" ry="5"
+            fill="none"
+            stroke="white"
+            stroke-width="2"/>
+      <circle cx="12" cy="12" r="4"
+              fill="none"
+              stroke="white"
+              stroke-width="2"/>
+      <circle cx="17.5" cy="6.7" r="1.2"/>
+    </svg>
+
+    BOUTIBORI KA SARVESH
+
+  </a>
+
+</div>
+
+
+<!-- HERO -->
+<section class="hero">
+
+  <div class="heroText">
+
+    <div class="badge">
+      BOUTIBORI KA SARVESH
+    </div>
+
+    <h1>
+      CINEMATIC<br>
+      <span>SARVESH</span>
+    </h1>
+
+    <p class="subtitle">
+      Professional cinematic shoots for special moments,
+      celebrations, weddings, cars and unforgettable memories.
+    </p>
+
+    <div class="buttons">
+
+      <a href="#services" class="btn dark">
+        Explore Services
+      </a>
+
+      <a href="#contact" class="btn light">
+        Contact Sarvesh
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- CAMERA -->
+  <div class="cameraArea">
+
+    <div class="glow"></div>
+
+    <div class="camera">
+
+      <div class="cameraTop"></div>
+
+      <div class="flash"></div>
+
+      <div class="lens"></div>
+
+      <div class="rec">
+        ● REC
+      </div>
+
+    </div>
+
+    <div class="tripod"></div>
+
+  </div>
+
+</section>
+
+
+<!-- SERVICES -->
+<section class="services" id="services">
+
+  <h2 class="title">
+    Our Services
+  </h2>
+
+  <p class="sub">
+    Professional Shoots • Cinematic Visuals • Special Moments
+  </p>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="no">01 / CINEMATIC</div>
+      <h3>Car Delivery Shoot</h3>
+      <p>
+        New car delivery ko cinematic style mein
+        capture karke memorable video banaya jayega.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="no">02 / CINEMATIC</div>
+      <h3>Wedding Shoot</h3>
+      <p>
+        Wedding ke beautiful aur special moments ko
+        professional cinematic style mein capture karein.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="no">03 / CINEMATIC</div>
+      <h3>Festival Shoot</h3>
+      <p>
+        Festival aur celebrations ke colourful moments
+        ko creative cinematic visuals mein capture karein.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="no">04 / CINEMATIC</div>
+      <h3>Cinematic Shoot</h3>
+      <p>
+        Creative cinematic videos with professional
+        framing, camera movement and storytelling.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section class="about">
+
+  <h2 class="title">
+    About Sarvesh
+  </h2>
+
+  <div class="aboutBox">
+
+    <p>
+      <b>Cinematic Sarvesh</b> — Boutibori ka Sarvesh.
+      Special moments ko creative aur cinematic style
+      mein capture karne ka passion.
+      Car deliveries, weddings, festivals aur
+      cinematic shoots ke liye professional presentation.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+
+  <h2>
+    Let's Create Something Cinematic
+  </h2>
+
+  <p>
+    Apne special moment ko cinematic banaayein.
+  </p>
+
+  <a href="https://www.instagram.com/" target="_blank">
+    DM on Instagram
+  </a>
+
+</section>
+
+
+<footer>
+  © 2026 CINEMATIC SARVESH • BOUTIBORI KA SARVESH
+</footer>
+
+</body>
+  </html>
